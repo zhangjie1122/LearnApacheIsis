@@ -23,11 +23,7 @@ import java.util.List;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.Identifier;
 import org.apache.isis.applib.annotation.Action;
-import org.apache.isis.applib.annotation.ActionLayout;
-import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainService;
-import org.apache.isis.applib.annotation.DomainServiceLayout;
-import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.SemanticsOf;
 import org.apache.isis.applib.query.QueryDefault;
@@ -35,7 +31,6 @@ import org.apache.isis.applib.services.eventbus.ActionDomainEvent;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 
 @DomainService(repositoryFor = SimpleObject.class)
-@DomainServiceLayout(menuOrder = "10")
 public class SimpleObjects {
 
     //region > title
@@ -48,10 +43,6 @@ public class SimpleObjects {
     @Action(
             semantics = SemanticsOf.SAFE
     )
-    @ActionLayout(
-            bookmarking = BookmarkPolicy.AS_ROOT
-    )
-    @MemberOrder(sequence = "1")
     public List<SimpleObject> listAll() {
         return container.allInstances(SimpleObject.class);
     }
@@ -61,10 +52,6 @@ public class SimpleObjects {
     @Action(
             semantics = SemanticsOf.SAFE
     )
-    @ActionLayout(
-            bookmarking = BookmarkPolicy.AS_ROOT
-    )
-    @MemberOrder(sequence = "2")
     public List<SimpleObject> findByName(
             @ParameterLayout(named="Name")
             final String name
@@ -87,7 +74,6 @@ public class SimpleObjects {
     @Action(
             domainEvent = CreateDomainEvent.class
     )
-    @MemberOrder(sequence = "3")
     public SimpleObject create(
             final @ParameterLayout(named="Name") String name) {
         final SimpleObject obj = container.newTransientInstance(SimpleObject.class);
