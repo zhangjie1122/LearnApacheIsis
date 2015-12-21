@@ -1,4 +1,4 @@
-package domainapp.dom.pet;
+package domainapp.dom.Pet;
 
 /**
  * Created by zj on 2015/12/19.
@@ -6,7 +6,8 @@ package domainapp.dom.pet;
 
 import java.util.List;
 
-import domainapp.dom.enums.PetSpecies;
+import domainapp.dom.Enums.PetSpecies;
+import domainapp.dom.Owner.Owner;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.query.QueryDefault;
 
@@ -33,10 +34,11 @@ public class Pets {
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     @MemberOrder(sequence = "2")
     public Pet create(@ParameterLayout(named = "name") final String name,
-                       final PetSpecies species) {
+                       final PetSpecies species, final Owner owner) {
         final Pet obj = container.newTransientInstance(Pet.class);
         obj.setName(name);
         obj.setSpecies(species);
+        obj.setOwner(owner);
         container.persistIfNotAlready(obj);
         return obj;
     }

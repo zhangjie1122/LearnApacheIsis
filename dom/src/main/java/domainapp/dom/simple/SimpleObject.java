@@ -39,15 +39,14 @@ import org.apache.isis.applib.util.ObjectContracts;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType=IdentityType.DATASTORE,
-        schema = "simple",
         table = "SimpleObject"
 )
 @javax.jdo.annotations.DatastoreIdentity(
         strategy=javax.jdo.annotations.IdGeneratorStrategy.IDENTITY,
          column="id")
 @javax.jdo.annotations.Version(
-//        strategy=VersionStrategy.VERSION_NUMBER,
-        strategy= VersionStrategy.DATE_TIME,
+        strategy=VersionStrategy.VERSION_NUMBER,
+//        strategy= VersionStrategy.DATE_TIME,
         column="version")
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
